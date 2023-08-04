@@ -1,0 +1,144 @@
+# 布林運算子
+
+#### 提醒： 此篇文是 **"資料型態"**中的布林值類別 及 **"比較運算子"** 延伸內容
+#### 閱讀過後或了解了再來閱讀此篇內容
+
+## 一、常見布林運算子
+
+| 運算子 | 名稱    |
+| ----- | -------- |
+| &&    | AND(且)  |
+| ||    | OR(或)   |
+| !     | NOT(非)  |
+
+`記得要大寫 不然我會強迫症發作`
+
+布林運算子與邏輯閘的運算方式類似(完全相同)
+
+### AND (且)
+
+輸入為兩布林值(分別用 0 與 1 表示)
+
+A, B 表示輸入 C 表示輸出
+
+| A | B | C |
+| - | - | - |
+| 1 | 1 | 1 |
+| 1 | 0 | 0 |
+| 0 | 1 | 0 |
+| 0 | 0 | 0 |
+
+顧名思義 AND(且)
+
+A, B 皆為 true 時 輸出才會為 true
+
+### OR (或)
+
+輸入為兩布林值(分別用 0 與 1 表示)
+
+A, B 表示輸入 C 表示輸出
+
+| A | B | C |
+| - | - | - |
+| 1 | 1 | 1 |
+| 1 | 0 | 1 |
+| 0 | 1 | 1 |
+| 0 | 0 | 0 |
+
+若 A, B 其一為 true 則輸出 true
+
+否則輸出 false
+
+### NOT (非)
+
+輸入為一布林值(分別用 0 與 1 表示)
+
+A 表示輸入 B 表示輸出
+
+| A | B |
+| - | - |
+| 1 | 0 |
+| 0 | 1 |
+
+會輸出與輸入值相反的布林值
+
+輸入 true  則輸出 false
+
+輸入 false 則輸出 true
+
+## 二、實際運用
+
+AND: `true && true  (此值為 true)`
+
+OR : `true || false (此值為 true)`
+
+NOT: `!true (此值為 false)`
+
+以下為 Code 範例
+```C++
+bool a = true && true;
+Serial.println(a); //印出 1
+
+bool b = true && false;
+Serial.println(b); //印出 0
+
+bool c = false || false;
+Serial.println(c); //印出 0
+
+bool d = !true;
+Serial.println(d); //印出 0
+
+//若不懂為何會出現以上結果
+//請去重讀上面或更以前的文章
+
+if(true && true) {
+    Serial.println("Success Execute!"); //成功印出 Success Execute!
+}
+
+if(!false) {
+    Serial.println("Success Execute!"); //成功印出 Success Execute!
+}
+
+if(a && b) {
+    Serial.println("Success Execute!"); //無法被執行到
+}
+
+if(!b) {
+    Serial.println("Success Execute!"); //成功印出 Success Execute!
+}
+
+if(2 > 1 || 1 > 3) {
+    Serial.println("Success Execute!"); //成功印出 Success Execute!
+}
+// 2 > 1 為 true
+// 1 > 3 為 false
+// true || false => true
+//因此 比較運算子 也可融入 布林運算子 中
+//(比較運算子的輸出就是布林值)
+```
+
+## 三、注意事項
+
+**千萬 千萬** 不要並列可能會造成邏輯矛盾的布林比較式
+
+```C++
+bool a = true && true && true && true; //此方式是可以的 並列幾個 AND 只要出現 false 結果就會是 false
+
+bool b = true || true || true || true; //此方式是可以的 並列幾個 OR 只要出現 true 結果就會是 false
+
+bool c = true && false || true && false; //不要使用此方法 因為無法預期優先預算會是算 AND 還是 OR
+
+bool d = (true && false) || (true && false); //加上括弧可以明確表示 消除此矛盾
+//(true && false) || (true && false)
+//(false) || (false)
+//false
+```
+
+## 四、延伸閱讀
+(邏輯閘- 維基百科，自由的百科全書)[https://zh.wikipedia.org/zh-tw/%E9%82%8F%E8%BC%AF%E9%96%98]
+
+## 五、本文重點節錄
+
+!(meme)[https://www.explainxkcd.com/wiki/images/9/9e/logic_gates.png]
+
+邏輯閘 鋼彈 變身！！！
